@@ -7,9 +7,6 @@
 #include <algorithm>
 #include <fstream>
 
-#include <cryptopp/files.h>
-#include <cryptopp/default.h>
-
 #include "threadpool.h"
 #include "helper.h"
 
@@ -31,8 +28,6 @@ public:
 
   Crypto();
   void processFiles();
-
-  std::vector<std::vector<std::string>> splitVector(const std::vector<std::string> &_files, int numberOfThreads);
 
   bool encryptFile(const char *fin, const char *fout, const char *passwd);
   void encryptFiles(std::vector<std::string> &files_, const std::string &password);

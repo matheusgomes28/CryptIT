@@ -1,4 +1,25 @@
+#include <cryptopp/files.h>
+#include <cryptopp/default.h>
+
 #include "include/crypto.h"
+
+namespace
+{
+  std::vector<std::vector<std::string>> splitVector(const std::vector<std::string> &_files, int numberOfThreads)
+  {
+    std::vector<std::vector<std::string>> filesSplit(numberOfThreads);
+
+    int i = 0;
+    for (const auto &file : _files)
+    {
+      filesSplit[i % numberOfThreads].push_back(file);
+      i++;
+    }
+
+    return filesSplit;
+  }
+} // namespace
+
 
 Crypto::Crypto()
 {
@@ -203,20 +224,6 @@ void Crypto::decrypt(std::string password)
   auto minutes = std::chrono::duration_cast<std::chrono::minutes>(end - start).count();
   auto seconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count() - minutes * 60;
   totalTime = std::to_string(minutes) + " minutes and " + std::to_string(seconds) + " seconds";
-}
-
-std::vector<std::vector<std::string>> Crypto::splitVector(const std::vector<std::string> &_files, int numberOfThreads)
-{
-  std::vector<std::vector<std::string>> filesSplit(numberOfThreads);
-
-  int i = 0;
-  for (const auto &file : _files)
-  {
-    filesSplit[i % numberOfThreads].push_back(file);
-    i++;
-  }
-
-  return filesSplit;
 }
 
 bool Crypto::foundPasswordFileInDirectory()
