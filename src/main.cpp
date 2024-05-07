@@ -22,6 +22,27 @@ Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
 
 #endif
 
+namespace
+{
+  void connect_button(layout, label, cryptoSection, dir)
+  {
+    // // If the button is clicked, start the SDR
+    QObject::connect(selectDir, &QPushButton::clicked, [&layout, &label, &cryptoSection, &dir]()
+                    {
+                      dir = QFileDialog::getExistingDirectory(NULL, "Open Directory", "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+                      cryptoSection.directoryPath = dir.toStdString() + "/";
+                      cryptoSection.updateGUI();
+                      label->setText("Selected directory: " + dir);
+
+                      // If the cryptoSection has not been added to the layout, add it
+                      if (cryptoSection.parent() == nullptr)
+                      {
+                        layout->addWidget(&cryptoSection);
+                      } });
+  }
+
+} // namespace
+
 int main(int argc, char *argv[])
 {
 

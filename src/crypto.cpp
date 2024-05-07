@@ -43,7 +43,7 @@ bool Crypto::encryptFile(const char *fin, const char *fout, const char *passwd)
   }
 }
 
-void Crypto::encryptFiles(std::vector<std::string> &files_, const std::string &password)
+void Crypto::encryptFiles(const std::vector<std::string> &files_, const std::string &password)
 {
   for (const auto &file : files_)
   {
