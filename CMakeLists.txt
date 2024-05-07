@@ -23,19 +23,7 @@ endif ()
 # ================================ #
 # Modules that need's to be in root (Local projects)
 find_package(Qt6 REQUIRED)
-if (NOT Qt6_FOUND)
-  message(FATAL_ERROR "Qt6 not found")
-endif (NOT Qt6_FOUND)
-
 find_package(cryptopp REQUIRED)
-if (NOT cryptopp_FOUND)
-  message(FATAL_ERROR "CryptoPP not found")
-endif (NOT cryptopp_FOUND)
-
-find_package(GTest)
-if (NOT GTest_FOUND)
-  message(FATAL_ERROR "GTest not found")
-endif (NOT GTest_FOUND)
 
 
 # ================================ #

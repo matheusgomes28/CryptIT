@@ -8,18 +8,9 @@ file(GLOB SOURCES "./*.cpp")
 # Add icons
 include(${CMAKE_SOURCE_DIR}/src/AddIconToBinary.cmake)
 AddIconToBinary(SOURCE_FILES ICONS ${CMAKE_SOURCE_DIR}/src/assets/icon.ico ${CMAKE_SOURCE_DIR}/src/assets/icon.icns)
-if (MSVC)
-    message(BUDLING_FOR " Building for Windows")
-    add_executable(${TARGET_NAME} WIN32 ${SOURCES} ${SOURCE_FILES} ${HEADERS})
-elseif(APPLE)
-    message(BUDLING_FOR " Building for MacOS")
-    add_executable(${TARGET_NAME} MACOSX_BUNDLE ${SOURCES} ${SOURCE_FILES} ${HEADERS})
-elseif(UNIX)
-    message(BUDLING_FOR " Building for Unix")
-    add_executable(${TARGET_NAME} ${SOURCES} ${SOURCE_FILES} ${HEADERS})
-else()
-    message(FATAL_ERROR "Unsupported platform, currently we are only supporting MacOS / Unix / Windows")
-endif()
+
+message(BUDLING_FOR " Building for Windows")
+add_executable(${TARGET_NAME} ${SOURCES} ${SOURCE_FILES} ${HEADERS})
 
 target_link_libraries(${TARGET_NAME} PRIVATE 
     cryptopp::cryptopp 
@@ -27,7 +18,7 @@ target_link_libraries(${TARGET_NAME} PRIVATE
     Qt6::Gui 
     Qt6::Widgets 
     Qt6::Platform 
-    gtest::gtest) 
+) 
 
 # If Windows, add  Qt6::QWindowsIntegrationPlugin to the target_link_libraries
 if (MSVC)

@@ -1,3 +1,5 @@
+find_package(GTest REQUIRED)
+
 add_executable(crypt-it-test
         crypto_test.cc
         helper_test.cc
